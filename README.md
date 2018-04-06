@@ -23,7 +23,7 @@ The Library consists of several modules, which can be used separately
 
 ```java
 dependencies {
-	compile 'com.scalified:jaxrs:0.0.3'
+	compile 'com.scalified:jaxrs:0.0.4'
 }
 ```
 
@@ -31,7 +31,7 @@ dependencies {
 
 ```java
 dependencies {
-	compile 'com.scalified:jaxrs-resteasy3:0.0.3'
+	compile 'com.scalified:jaxrs-resteasy3:0.0.4'
 
 	compileOnly "org.jboss.resteasy:resteasy-multipart-provider:3.0.1.Final"
 }
