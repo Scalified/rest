@@ -70,8 +70,27 @@ public final class MultipartUtils {
 	}
 
 	/**
+	 * Extracts generic type part value from the given {@link MultipartFormDataInput}
+	 * by the given key
+	 *
+	 * @param input {@link MultipartFormDataInput} to extract from
+	 * @param key   a key to extract by
+	 * @param type  part value type
+	 * @param <T>   generic part value type
+	 * @return extracted generic type part value
+	 * @throws RuntimeException if extraction was unsuccessful
+	 */
+	public static <T> T extractPart(MultipartFormDataInput input, String key, Class<T> type) {
+		try {
+			return input.getFormDataPart(key, new GenericType<>(type));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
 	 * Extracts {@link String} part from the given {@link MultipartFormDataInput}
-	 * having the given key
+	 * by the given key
 	 *
 	 * @param input {@link MultipartFormDataInput} to extract from
 	 * @param key   a key to extract by
@@ -79,12 +98,7 @@ public final class MultipartUtils {
 	 * @throws RuntimeException if extraction was unsuccessful
 	 */
 	public static String extractPart(MultipartFormDataInput input, String key) {
-		try {
-			return input.getFormDataPart(key, new GenericType<String>() {
-			});
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		return extractPart(input, key, String.class);
 	}
 
 	/**

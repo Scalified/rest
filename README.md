@@ -23,7 +23,7 @@ The Library consists of several modules, which can be used separately
 
 ```java
 dependencies {
-	compile 'com.scalified:jaxrs:0.0.4'
+	compile "com.scalified:jaxrs:$version"
 }
 ```
 
@@ -31,7 +31,7 @@ dependencies {
 
 ```java
 dependencies {
-	compile 'com.scalified:jaxrs-resteasy3:0.0.4'
+	compile "com.scalified:jaxrs-resteasy3:$version"
 
 	compileOnly "org.jboss.resteasy:resteasy-multipart-provider:3.0.1.Final"
 }
@@ -204,6 +204,9 @@ public class Controller {
     @Path("/files")
     @Consumes(ExtendedMediaType.MULTIPART_FORM_DATA)
     public Response uploadAttachment(MultipartFormDataInput input) {
+    	
+    	// Extracting generic types from MultipartFormDataInput
+    	Long someValue = MultipartUtils.extractPart(input, "someValue", Long.class);
 
         // Extracting String parts from MultipartFormDataInput
         String someId = MultipartUtils.extractPart(input, "someId");

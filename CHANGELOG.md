@@ -1,3 +1,7 @@
+# 0.0.5
+
+* [**#5** Multipart Extract Generic Type](https://github.com/Scalified/rest/issues/5)
+
 # 0.0.4
 
 * [**#1** Add Equals, HashCode and toString Methods To Request Object](https://github.com/Scalified/rest/issues/1)
