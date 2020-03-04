@@ -22,11 +22,13 @@
  * SOFTWARE.
  */
 
-apply plugin: 'java'
-apply plugin: 'maven-publish'
+plugins {
+	id 'java-library'
+	id 'maven-publish'
+}
 
 dependencies {
 	compileOnly 'javax.ws.rs:javax.ws.rs-api:2.1'
 
-	compile 'org.apache.commons:commons-lang3:3.7'
+	api 'org.apache.commons:commons-lang3:3.9'
 }

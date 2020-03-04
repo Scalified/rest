@@ -21,19 +21,17 @@ The Library consists of several modules, which can be used separately
 
 ### jaxrs
 
-```java
+```gradle
 dependencies {
-	compile "com.scalified:jaxrs:$version"
+	implementation "com.scalified:jaxrs:$version"
 }
 ```
 
 ### jaxrs-resteasy3
 
-```java
+```gradle
 dependencies {
-	compile "com.scalified:jaxrs-resteasy3:$version"
-
-	compileOnly "org.jboss.resteasy:resteasy-multipart-provider:3.0.1.Final"
+	implementation "com.scalified:jaxrs-resteasy3:$version"
 }
 ```
 

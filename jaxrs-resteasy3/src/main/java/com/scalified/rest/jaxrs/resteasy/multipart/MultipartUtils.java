@@ -25,6 +25,7 @@
 package com.scalified.rest.jaxrs.resteasy.multipart;
 
 import com.scalified.rest.jaxrs.extension.ExtendedMediaType;
+import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
@@ -146,7 +147,7 @@ public final class MultipartUtils {
 	 * @throws RuntimeException if parsing was unsuccessful
 	 */
 	private static String parseFileName(String input) {
-		String parsed = StringUtils.removePattern(StringUtils.substringAfter(input, FILENAME), FILENAME_REGEX);
+		String parsed = RegExUtils.removePattern(StringUtils.substringAfter(input, FILENAME), FILENAME_REGEX);
 		try {
 			return URLDecoder.decode(parsed, StandardCharsets.UTF_8.displayName());
 		} catch (UnsupportedEncodingException e) {
