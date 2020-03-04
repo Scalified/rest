@@ -27,7 +27,7 @@ import java.nio.charset.StandardCharsets
 allprojects {
 
 	group = 'com.scalified'
-	version = '0.0.5'
+	version = '1.0.0'
 
 	repositories {
 		mavenCentral()

@@ -1,3 +1,7 @@
+# 1.0.0
+
+* [**#7** Java EE 8.0 Api Update](https://github.com/Scalified/rest/issues/7)
+
 # 0.0.5
 
 * [**#5** Multipart Extract Generic Type](https://github.com/Scalified/rest/issues/5)
