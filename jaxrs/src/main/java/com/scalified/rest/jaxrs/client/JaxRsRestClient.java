@@ -278,10 +278,8 @@ public class JaxRsRestClient implements RestClient {
 				final Response.Status status = Response.Status.fromStatusCode(response.getStatus());
 				try {
 					if (nonNull(status)) {
-						switch (status) {
-							case NOT_FOUND:
-								request.notFoundConsumer.accept(response);
-								break;
+						if (status == Response.Status.NOT_FOUND) {
+							request.notFoundConsumer.accept(response);
 						}
 					}
 					request.unsuccessfulResponseConsumer.accept(response);

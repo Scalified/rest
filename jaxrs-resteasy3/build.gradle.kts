@@ -23,12 +23,12 @@
  */
 
 plugins {
-	id 'java-library'
-	id 'maven-publish'
+	`java-library`
+	`maven-publish`
 }
 
 dependencies {
-	compileOnly "org.jboss.resteasy:resteasy-multipart-provider:3.11.0.Final"
+	compileOnly("org.jboss.resteasy:resteasy-multipart-provider:3.11.0.Final")
 
-	api project(':jaxrs')
+	api(project(":jaxrs"))
 }

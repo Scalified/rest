@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 
-rootProject.name = 'rest'
-include 'jaxrs'
-include 'jaxrs-resteasy3'
+rootProject.name = "rest"
+
+include("jaxrs", "jaxrs-resteasy3")
