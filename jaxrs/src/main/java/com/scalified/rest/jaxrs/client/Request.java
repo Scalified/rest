@@ -92,6 +92,16 @@ public class Request {
 	Consumer<Throwable> failureConsumer;
 
 	/**
+	 * Returns the <b>HTTP</b> {@link Request} builder
+	 *
+	 * @param url request URL
+	 * @return <b>HTTP</b> {@link Request} builder
+	 */
+	public static Builder builder(String url) {
+		return new Builder(url);
+	}
+
+	/**
 	 * Returns request URL
 	 *
 	 * @return request URL
@@ -182,16 +192,6 @@ public class Request {
 	}
 
 	/**
-	 * Returns the <b>HTTP</b> {@link Request} builder
-	 *
-	 * @param url request URL
-	 * @return <b>HTTP</b> {@link Request} builder
-	 */
-	public static Builder builder(String url) {
-		return new Builder(url);
-	}
-
-	/**
 	 * Indicates whether some other object is "equal to" this one.
 	 * <p>
 	 * The {@code equals} method implements an equivalence relation
@@ -231,11 +231,11 @@ public class Request {
 	 * general contract for the {@code hashCode} method, which states
 	 * that equal objects must have equal hash codes.
 	 *
-	 * @param   obj   the reference object with which to compare.
-	 * @return  {@code true} if this object is the same as the obj
-	 *          argument; {@code false} otherwise.
-	 * @see     #hashCode()
-	 * @see     java.util.HashMap
+	 * @param obj the reference object with which to compare.
+	 * @return {@code true} if this object is the same as the obj
+	 * argument; {@code false} otherwise.
+	 * @see #hashCode()
+	 * @see java.util.HashMap
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -285,9 +285,9 @@ public class Request {
 	 * technique is not required by the
 	 * Java&trade; programming language.)
 	 *
-	 * @return  a hash code value for this object.
-	 * @see     java.lang.Object#equals(java.lang.Object)
-	 * @see     java.lang.System#identityHashCode
+	 * @return a hash code value for this object.
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 * @see java.lang.System#identityHashCode
 	 */
 	@Override
 	public int hashCode() {
@@ -324,7 +324,7 @@ public class Request {
 	 * getClass().getName() + '@' + Integer.toHexString(hashCode())
 	 * </pre></blockquote>
 	 *
-	 * @return  a string representation of the object.
+	 * @return a string representation of the object.
 	 */
 	@Override
 	public String toString() {
@@ -355,22 +355,22 @@ public class Request {
 		/**
 		 * Request path parameters;
 		 */
-		private Collection<String> pathParams = new LinkedList<>();
+		private final Collection<String> pathParams = new LinkedList<>();
 
 		/**
 		 * Request query parameters
 		 */
-		private Map<String, Collection<?>> queryParams = new HashMap<>();
+		private final Map<String, Collection<?>> queryParams = new HashMap<>();
 
 		/**
 		 * Request headers
 		 */
-		private Map<String, Object> headers = new HashMap<>();
+		private final Map<String, Object> headers = new HashMap<>();
 
 		/**
 		 * Request accepted media types
 		 */
-		private Set<MediaType> mediaTypes = new HashSet<>();
+		private final Set<MediaType> mediaTypes = new HashSet<>();
 
 		/**
 		 * Request entity

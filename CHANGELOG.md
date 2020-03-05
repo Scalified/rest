@@ -1,3 +1,7 @@
+# 1.0.1
+
+* [**#9** Gradle Kotlin DSL](https://github.com/Scalified/rest/issues/9)
+
 # 1.0.0
 
 * [**#7** Java EE 8.0 Api Update](https://github.com/Scalified/rest/issues/7)

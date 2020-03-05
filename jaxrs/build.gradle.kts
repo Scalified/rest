@@ -22,21 +22,13 @@
  * SOFTWARE.
  */
 
-import java.nio.charset.StandardCharsets
+plugins {
+	`java-library`
+	`maven-publish`
+}
 
-allprojects {
+dependencies {
+	compileOnly("javax.ws.rs:javax.ws.rs-api:2.1")
 
-	group = 'com.scalified'
-	version = '1.0.0'
-
-	repositories {
-		mavenCentral()
-	}
-
-	tasks.withType(JavaCompile) {
-		sourceCompatibility = JavaVersion.VERSION_1_8
-		targetCompatibility = JavaVersion.VERSION_1_8
-		options.encoding = StandardCharsets.UTF_8.name()
-	}
-
+	api("org.apache.commons:commons-lang3:3.9")
 }

@@ -110,6 +110,42 @@ public enum ExtendedStatus implements Response.StatusType {
 	}
 
 	/**
+	 * Searches for an appropriate {@link javax.ws.rs.core.Response.StatusType} object
+	 * by the specified statusCode.
+	 * <p>
+	 * Returns a newly created {@link javax.ws.rs.core.Response.StatusType}
+	 * with unknown reason phrase and the specified status code, if there is no
+	 * {@link javax.ws.rs.core.Response.StatusType} with the status code specified
+	 *
+	 * @param statusCode HTTP status code to search {@link javax.ws.rs.core.Response.StatusType} by
+	 * @return appropriate {@link javax.ws.rs.core.Response.StatusType} if there is such
+	 * {@link javax.ws.rs.core.Response.StatusType} with status code specified, otherwise returns
+	 * custom {@link javax.ws.rs.core.Response.StatusType}
+	 */
+	public static Response.StatusType from(final int statusCode) {
+		Response.StatusType status = Response.Status.fromStatusCode(statusCode);
+		return Objects.nonNull(status) ? status : Arrays.<Response.StatusType>stream(values())
+				.filter(s -> s.getStatusCode() == statusCode)
+				.findFirst()
+				.orElse(new Response.StatusType() {
+					@Override
+					public int getStatusCode() {
+						return statusCode;
+					}
+
+					@Override
+					public Response.Status.Family getFamily() {
+						return OTHER;
+					}
+
+					@Override
+					public String getReasonPhrase() {
+						return "Unknown HTTP Status Code";
+					}
+				});
+	}
+
+	/**
 	 * Get the associated status code.
 	 *
 	 * @return the status code.
@@ -150,42 +186,6 @@ public enum ExtendedStatus implements Response.StatusType {
 	@Override
 	public final String getReasonPhrase() {
 		return this.reasonPhrase;
-	}
-
-	/**
-	 * Searches for an appropriate {@link javax.ws.rs.core.Response.StatusType} object
-	 * by the specified statusCode.
-	 * <p>
-	 * Returns a newly created {@link javax.ws.rs.core.Response.StatusType}
-	 * with unknown reason phrase and the specified status code, if there is no
-	 * {@link javax.ws.rs.core.Response.StatusType} with the status code specified
-	 *
-	 * @param statusCode HTTP status code to search {@link javax.ws.rs.core.Response.StatusType} by
-	 * @return appropriate {@link javax.ws.rs.core.Response.StatusType} if there is such
-	 * {@link javax.ws.rs.core.Response.StatusType} with status code specified, otherwise returns
-	 * custom {@link javax.ws.rs.core.Response.StatusType}
-	 */
-	public static Response.StatusType from(final int statusCode) {
-		Response.StatusType status = Response.Status.fromStatusCode(statusCode);
-		return Objects.nonNull(status) ? status : Arrays.<Response.StatusType>stream(values())
-				.filter(s -> s.getStatusCode() == statusCode)
-				.findFirst()
-				.orElse(new Response.StatusType() {
-					@Override
-					public int getStatusCode() {
-						return statusCode;
-					}
-
-					@Override
-					public Response.Status.Family getFamily() {
-						return OTHER;
-					}
-
-					@Override
-					public String getReasonPhrase() {
-						return "Unknown HTTP Status Code";
-					}
-				});
 	}
 
 }

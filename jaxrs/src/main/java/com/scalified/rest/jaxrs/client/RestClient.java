@@ -43,6 +43,42 @@ import java.util.Optional;
 public interface RestClient {
 
 	/**
+	 * Returns <b>true</b> if the specified {@link Response} has successful status code (e.g. 2xx),
+	 * otherwise returns <b>false</b>
+	 *
+	 * @param response response the check the status code of
+	 * @return <b>true</b> if the specified {@link Response} has successful status code (e.g. 2xx),
+	 * otherwise returns <b>false</b>
+	 */
+	static boolean isSuccessful(Response response) {
+		return Range.between(200, 299).contains(response.getStatus());
+	}
+
+	/**
+	 * Creates the new {@link Response} object from the given {@link Response}
+	 * <p>
+	 * The original <b>HTTP</b> response status, entity and headers retained
+	 *
+	 * @param response a {@link Response} object to create the new one from
+	 * @return new {@link Response} object from the given {@link Response}
+	 */
+	static Response from(Response response) {
+		try {
+			Response.ResponseBuilder builder = Response.status(response.getStatus())
+					.entity(response.readEntity(byte[].class));
+			Map<String, List<Object>> headers = response.getHeaders();
+			for (Map.Entry<String, List<Object>> header : headers.entrySet()) {
+				builder = builder.header(
+						header.getKey(), StringUtils.join(header.getValue().iterator(), ';')
+				);
+			}
+			return builder.build();
+		} finally {
+			response.close();
+		}
+	}
+
+	/**
 	 * Performs <b>HTTP GET</b> request and returns response
 	 *
 	 * @param request request
@@ -153,41 +189,5 @@ public interface RestClient {
 	 * @return optional response entity
 	 */
 	<T> Optional<T> delete(Request request, GenericType<T> responseEntityType);
-
-	/**
-	 * Returns <b>true</b> if the specified {@link Response} has successful status code (e.g. 2xx),
-	 * otherwise returns <b>false</b>
-	 *
-	 * @param response response the check the status code of
-	 * @return <b>true</b> if the specified {@link Response} has successful status code (e.g. 2xx),
-	 * otherwise returns <b>false</b>
-	 */
-	static boolean isSuccessful(Response response) {
-		return Range.between(200, 299).contains(response.getStatus());
-	}
-
-	/**
-	 * Creates the new {@link Response} object from the given {@link Response}
-	 * <p>
-	 * The original <b>HTTP</b> response status, entity and headers retained
-	 *
-	 * @param response a {@link Response} object to create the new one from
-	 * @return new {@link Response} object from the given {@link Response}
-	 */
-	static Response from(Response response) {
-		try {
-			Response.ResponseBuilder builder = Response.status(response.getStatus())
-					.entity(response.readEntity(byte[].class));
-			Map<String, List<Object>> headers = response.getHeaders();
-			for (Map.Entry<String, List<Object>> header : headers.entrySet()) {
-				builder = builder.header(
-						header.getKey(), StringUtils.join(header.getValue().iterator(), ';')
-				);
-			}
-			return builder.build();
-		} finally {
-			response.close();
-		}
-	}
 
 }

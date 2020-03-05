@@ -24,7 +24,6 @@
 
 package com.scalified.rest.jaxrs.resteasy.multipart;
 
-import com.scalified.rest.jaxrs.extension.ExtendedMediaType;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
@@ -41,7 +40,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * An utility class for working with {@link ExtendedMediaType#MULTIPART_FORM_DATA}
+ * An utility class for working with {@link javax.ws.rs.core.MediaType#MULTIPART_FORM_DATA}
  *
  * @author shell
  * @version 1.0.0
